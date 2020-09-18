@@ -9,29 +9,29 @@ const Header = () => {
   return (
 	<Navbar bg="dark" variant="dark" expand="lg" sticky="top">
 		<Container>
-			<Navbar.Brand href="#">
-				<Link to={`${publicURL}`}>
-					<img
-				        src="public/assets/images/logo3.png"
-				        width="100"
-				        height="36"
-				        className="d-inline-block align-top"
-				        alt="task logo"
-				    />
-				</Link>
-			</Navbar.Brand>
+			<Link to={`${publicURL}`}>
+				<Navbar.Brand>
+						<img
+							src="public/assets/images/logo3.png"
+							width="100"
+							height="36"
+							className="d-inline-block align-top"
+							alt="task logo"
+						/>
+				</Navbar.Brand>
+			</Link>
 			<Navbar.Toggle aria-controls="basic-navbar-nav" />
 			<Navbar.Collapse id="basic-navbar-nav">
 				<Nav className="mr-auto">
-					<Nav.Link href="#">
-						<Link to={`${publicURL}`}>Home</Link>
-					</Nav.Link>
-					<Nav.Link href="#">
-						<Link to={`${publicURL}/contact`}>Contact</Link>
-					</Nav.Link>
-					<Nav.Link href="#">
-						<Link to={`${publicURL}/about`}>About</Link>
-					</Nav.Link>
+					<Link to={`${publicURL}`}>
+						<Nav.Item className="text-white mr-2 mt-2">Home</Nav.Item>
+					</Link>
+					<Link to={`${publicURL}/contact`}>
+						<Nav.Item className="text-white mr-2 mt-2">Contact</Nav.Item>
+					</Link>
+					<Link to={`${publicURL}/about`}>
+						<Nav.Item className="text-white mr-2 mt-2">About</Nav.Item>
+					</Link>
 					<NavDropdown title="Dropdown" id="basic-nav-dropdown">
 						<NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
 						<NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
