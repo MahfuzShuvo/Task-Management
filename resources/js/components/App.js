@@ -9,6 +9,7 @@ import { Container } from "react-bootstrap";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import ProjectList from "./pages/projects/ProjectList";
 
 export class App extends Component {
     state = {
@@ -20,20 +21,27 @@ export class App extends Component {
             <Router>
                 <Header />
                 <div>
-                    <Switch>
-                        <Route path={`${this.state.PUBLIC_URL}/about`}>
-                            <About />
-                        </Route>
-                        <Route path={`${this.state.PUBLIC_URL}/contact`}>
-                            <Contact />
-                        </Route>
-                        <Route path={`${this.state.PUBLIC_URL}`}>
-                            <Home />
-                        </Route>
-                    </Switch>
+                    <Container className="p-4">
+                        <Switch>
+                            <Route path={`${this.state.PUBLIC_URL}/about`}>
+                                <About />
+                            </Route>
+                            <Route path={`${this.state.PUBLIC_URL}/contact`}>
+                                <Contact />
+                            </Route>
+                            <Route path={`${this.state.PUBLIC_URL}/projects`}>
+                                <ProjectList />
+                            </Route>
+                            <Route path={`${this.state.PUBLIC_URL}`}>
+                                <Home />
+                            </Route>
+                        </Switch>
+
+                        <Footer />
+                    </Container>
                 </div>
 
-                <Footer />
+               
             </Router>
         );
     }

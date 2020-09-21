@@ -26,11 +26,14 @@ const Header = () => {
 					<Link to={`${publicURL}`}>
 						<Nav.Item className="text-white mr-2 mt-2">Home</Nav.Item>
 					</Link>
-					<Link to={`${publicURL}/contact`}>
-						<Nav.Item className="text-white mr-2 mt-2">Contact</Nav.Item>
+					<Link to={`${publicURL}/projects`}>
+						<Nav.Item className="text-white mr-2 mt-2">Projects</Nav.Item>
 					</Link>
 					<Link to={`${publicURL}/about`}>
 						<Nav.Item className="text-white mr-2 mt-2">About</Nav.Item>
+					</Link>
+					<Link to={`${publicURL}/contact`}>
+						<Nav.Item className="text-white mr-2 mt-2">Contact</Nav.Item>
 					</Link>
 					<NavDropdown title="Dropdown" id="basic-nav-dropdown">
 						<NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
