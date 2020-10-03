@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { Container, Navbar, Nav, NavDropdown, Image, Figure } from 'react-bootstrap';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { PUBLIC_URL } from '../../constants';
 
 const Header = () => {
 
-  const [publicURL, setPublicURL] = useState("/task");
+//   const [publicURL, setPublicURL] = useState("/task");
 
   return (
 	<Navbar bg="dark" variant="dark" expand="lg" sticky="top">
 		<Container>
-			<Link to={`${publicURL}`}>
+			<Link to={`${PUBLIC_URL}`}>
 				<Navbar.Brand>
 						<img
 							src="public/assets/images/logo3.png"
@@ -23,16 +24,16 @@ const Header = () => {
 			<Navbar.Toggle aria-controls="basic-navbar-nav" />
 			<Navbar.Collapse id="basic-navbar-nav">
 				<Nav className="mr-auto">
-					<Link to={`${publicURL}`}>
+					<Link to={`${PUBLIC_URL}`}>
 						<Nav.Item className="text-white mr-2 mt-2">Home</Nav.Item>
 					</Link>
-					<Link to={`${publicURL}/projects`}>
+					<Link to={`${PUBLIC_URL}/projects`}>
 						<Nav.Item className="text-white mr-2 mt-2">Projects</Nav.Item>
 					</Link>
-					<Link to={`${publicURL}/about`}>
+					<Link to={`${PUBLIC_URL}/about`}>
 						<Nav.Item className="text-white mr-2 mt-2">About</Nav.Item>
 					</Link>
-					<Link to={`${publicURL}/contact`}>
+					<Link to={`${PUBLIC_URL}/contact`}>
 						<Nav.Item className="text-white mr-2 mt-2">Contact</Nav.Item>
 					</Link>
 					<NavDropdown title="Dropdown" id="basic-nav-dropdown">

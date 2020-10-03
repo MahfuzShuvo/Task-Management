@@ -1,6 +1,8 @@
 import Axios from 'axios';
 import React from 'react';
 import { Card, Button, Badge, Spinner } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { PUBLIC_URL } from '../../../constants';
 
 class ProjectList extends React.Component {
     state = {
@@ -28,7 +30,15 @@ class ProjectList extends React.Component {
     render() { 
         return ( 
             <>
-                <h2>Project List</h2>
+                <div className="header-part">
+                    <div className="float-left">
+                        <h2>Project List <Badge variant="warning">{this.state.projectList.length}</Badge></h2>
+                    </div>
+                    <div className="float-right">
+                        <Link to={`${PUBLIC_URL}/project/create`} className="btn btn-secondary">+ Create Project</Link>
+                    </div>
+                </div>
+                <div className="clearfix"></div>
                 <hr/>
                 {
                     this.state.isLoading && (
@@ -39,24 +49,29 @@ class ProjectList extends React.Component {
                         </div>
                     )
                 }
-                {
-                    this.state.projectList.map((project, index) => (
-                        <Card className="mt-2" key={ index }>
-                            <Card.Header>{ project.name } <Badge variant="primary">{ project.tasks_count } task</Badge></Card.Header>
-                            <Card.Body>
-                                <Card.Title>Description: </Card.Title>
+                <div className="row">
+                    {
+                        this.state.projectList.map((project, index) => (
+                            <div className="col-md-3">
+                                <Card className="mt-2" key={ index }>
+                                    <Card.Header>{ project.name } <Badge variant="primary">{ project.tasks_count } task</Badge></Card.Header>
+                                    <Card.Body>
+                                        <Card.Title>Description: </Card.Title>
 
-                                <Card.Text>
-                                    { project.description }
-                                </Card.Text>
+                                        <Card.Text>
+                                            { project.description }
+                                        </Card.Text>
 
-                                <Button variant="success" className="mr-2">view</Button>
-                                <Button variant="dark" className="mr-2">Edit</Button>
-                                <Button variant="danger" className="mr-2">Delete</Button>
-                            </Card.Body>
-                        </Card>
-                    ))
-                }
+                                        <Button variant="success" className="mr-2">view</Button>
+                                        <Button variant="dark" className="mr-2">Edit</Button>
+                                        <Button variant="danger" className="mr-2">Delete</Button>
+                                    </Card.Body>
+                                </Card>
+                            </div>
+                        ))
+                    }
+                </div>
+                
             </>
         );
     }
