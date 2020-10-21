@@ -35,7 +35,7 @@ class ProjectList extends React.Component {
                         <h2>Project List <Badge variant="warning">{this.state.projectList.length}</Badge></h2>
                     </div>
                     <div className="float-right">
-                        <Link to={`${PUBLIC_URL}/project/create`} className="btn btn-secondary">+ Create Project</Link>
+                        <Link to={`${PUBLIC_URL}/project/create`} className="btn btn-secondary" >+ Create Project</Link>
                     </div>
                 </div>
                 <div className="clearfix"></div>
@@ -62,9 +62,12 @@ class ProjectList extends React.Component {
                                             { project.description }
                                         </Card.Text>
 
-                                        <Button variant="success" className="mr-2">view</Button>
-                                        <Button variant="dark" className="mr-2">Edit</Button>
-                                        <Button variant="danger" className="mr-2">Delete</Button>
+                                        {/* <Button variant="success" className="mr-2" size="sm">
+                                            <Link to={`${PUBLIC_URL}/project/view/${project.id}`} className="btn btn-success sm mr-2">view</Link>
+                                        </Button> */}
+                                        <Button href={`${PUBLIC_URL}/project/view/${project.id}`} variant="success" className="mr-2" size="sm">view</Button>
+                                        <Button  href="#" variant="dark" className="mr-2" size="sm">Edit</Button>
+                                        <Button  href="#" variant="danger" className="mr-2" size="sm">Delete</Button>
                                     </Card.Body>
                                 </Card>
                             </div>
