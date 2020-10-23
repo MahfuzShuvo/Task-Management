@@ -33,6 +33,7 @@ class ProjectRepository implements CrudInterface
         $project = Project::find($id);
         $project->name = $request->name;
         $project->description = $request->description;
+        $project->status = $request->status;
         $project->user_id = $request->user_id;
         $project->save();
 

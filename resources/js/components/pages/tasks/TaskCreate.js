@@ -5,6 +5,7 @@ import { Card, Button, Badge, Spinner, Form } from 'react-bootstrap';
 import { PUBLIC_URL } from '../../../constants';
 import { storeNewTask } from '../../../services/TaskServices';
 
+
 class TaskCreate extends React.Component {
     state = {
         isLoading: false,
@@ -65,75 +66,72 @@ class TaskCreate extends React.Component {
                 <hr/> */}
                 
                 {
-                    <div className="row justify-content-md-center mb-3">
-                        <div className="col-6">
-                        <Card>
-                            <Card.Body>
-                                <h4 className="text-center">New Task</h4>
-                                <Form onSubmit = { this.submitForm }>
-                                    <Form.Group controlId="name">
-                                        <Form.Label>Task Title</Form.Label>
-                                        <Form.Control 
-                                            type="text" 
-                                            placeholder="Enter task name" 
-                                            name="name" 
-                                            value= { this.state.name }
-                                            onChange = { (e) => this.changeInput(e) }
-                                        />
-                                        {
-                                            this.state.errors && this.state.errors.name && (
-                                                <Form.Text className="text-danger">
-                                                    {this.state.errors.name[0]}
-                                                </Form.Text>
-                                            )
-                                        }
-                                    </Form.Group>
-                            
-                                    <Form.Group controlId="description">
-                                        <Form.Label>Description</Form.Label>
-                                        <Form.Control 
-                                            as="textarea" 
-                                            rows="2" 
-                                            placeholder="Enter task description" 
-                                            name="description" 
-                                            value= { this.state.description }
-                                            onChange = { (e) => this.changeInput(e) }
-                                        />
-                                        {
-                                            this.state.errors && this.state.errors.description && (
-                                                <Form.Text className="text-danger">
-                                                    {this.state.errors.description[0]}
-                                                </Form.Text>
-                                            )
-                                        }
-                                    </Form.Group>
-
+                    
+                    <Card>
+                        <Card.Body>
+                            <h4 className="text-center">New Task</h4>
+                            <Form onSubmit = { this.submitForm }>
+                                <Form.Group controlId="name">
+                                    <Form.Label>Task Title</Form.Label>
+                                    <Form.Control 
+                                        type="text" 
+                                        placeholder="Enter task name" 
+                                        name="name" 
+                                        value= { this.state.name }
+                                        onChange = { (e) => this.changeInput(e) }
+                                    />
                                     {
-                                        this.state.isLoading && (
-                                            <Button variant="primary" type="button" disabled>
-                                                <Spinner animation="border" role="status">
-                                                    <span className="sr-only">Loading...</span>
-                                                </Spinner>
-                                                Saving...
-                                            </Button>
+                                        this.state.errors && this.state.errors.name && (
+                                            <Form.Text className="text-danger">
+                                                {this.state.errors.name[0]}
+                                            </Form.Text>
                                         )
                                     }
-
+                                </Form.Group>
+                        
+                                <Form.Group controlId="description">
+                                    <Form.Label>Description</Form.Label>
+                                    <Form.Control 
+                                        as="textarea" 
+                                        rows="2" 
+                                        placeholder="Enter task description" 
+                                        name="description" 
+                                        value= { this.state.description }
+                                        onChange = { (e) => this.changeInput(e) }
+                                    />
                                     {
-                                        !this.state.isLoading && (
-                                            <Button variant="primary" type="submit">
-                                                Submit
-                                            </Button>
+                                        this.state.errors && this.state.errors.description && (
+                                            <Form.Text className="text-danger">
+                                                {this.state.errors.description[0]}
+                                            </Form.Text>
                                         )
                                     }
+                                </Form.Group>
 
-                                </Form>
-                            </Card.Body>
-                        </Card>
-                        </div>
-                    </div>
+                                {
+                                    this.state.isLoading && (
+                                        <Button variant="primary" type="button" disabled>
+                                            <Spinner animation="border" role="status">
+                                                <span className="sr-only">Loading...</span>
+                                            </Spinner>
+                                            Saving...
+                                        </Button>
+                                    )
+                                }
+
+                                {
+                                    !this.state.isLoading && (
+                                        <Button variant="primary" type="submit">
+                                            Submit
+                                        </Button>
+                                    )
+                                }
+
+                            </Form>
+                        </Card.Body>
+                    </Card>
+                        
                 }
-                <hr/>
                 
             </>
         );

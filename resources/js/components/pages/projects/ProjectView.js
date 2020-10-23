@@ -6,6 +6,10 @@ import { PUBLIC_URL } from '../../../constants';
 import moment from 'moment';
 import TaskCreate from '../tasks/TaskCreate';
 import TaskList from '../tasks/TaskList';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit, faTimes, faPauseCircle, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import ProjectEdit from './ProjectEdit';
+
 
 class ProjectView extends React.Component {
     state = {
@@ -41,6 +45,11 @@ class ProjectView extends React.Component {
             toggleAddTask: !this.state.toggleAddTask
         });
     };
+    toggleEditProject = () => {
+        this.setState({
+            toggleEditProject: !this.state.toggleEditProject
+        });
+    };
 
     onCompleteTaskCreate = (task) => {
         this.toggleAddTask();
@@ -53,6 +62,11 @@ class ProjectView extends React.Component {
             taskList: tasks,
         });
     };
+    onCompleteEditProject = () => {
+        this.toggleEditProject();
+
+        this.getProjectDetails();
+    };
 
     render() { 
         const mystyle = {
@@ -62,8 +76,34 @@ class ProjectView extends React.Component {
         return ( 
             <>
                 <div className="header-part">
-                    <div className="float-left">
-                        <h2>{ this.state.project.name }</h2>
+                    <div className="float-left d-flex">
+                    { !this.state.toggleEditProject && (
+                            <>
+                                <h2>{ this.state.project.name }</h2>
+                            </>
+                        )
+                    }
+                    { this.state.toggleEditProject && (
+                            <>
+                                <h2>Edit Project</h2>
+                            </>
+                        )
+                    }
+                         
+                         <Button className="ml-2" onClick={ () => this.toggleEditProject() } style={{background: "transparent", border: "none"}}>
+                            { !this.state.toggleEditProject && (
+                                    <span>
+                                        <FontAwesomeIcon icon={faEdit} style={{color: "#239aff"}} />
+                                    </span>
+                                )
+                            }
+                            { this.state.toggleEditProject && (
+                                    <span>
+                                        <FontAwesomeIcon icon={faTimes} style={{color: "#e3342f"}} />
+                                    </span>
+                                )
+                            }
+                        </Button>
                     </div>
                     <div className="float-right">
                         <Button variant="secondary" className="mr-2" onClick={ () => this.toggleAddTask() }>
@@ -80,29 +120,68 @@ class ProjectView extends React.Component {
                 </div>
                 <div className="clearfix"></div>
                 <hr/>
+                <div className="row">
+                    <div className="col-md-6">
+                    {
+                        this.state.toggleEditProject && (
+                            <ProjectEdit 
+                                project = { this.state.project }
+                                onCompleteEditProject = { this.onCompleteEditProject }
+                            />
+                        )
+                    }
+                    </div>
+                    <div className="col-md-6">
+                    {
+                        this.state.toggleAddTask && (
+                            <TaskCreate 
+                                project_id = { this.props.match.params.id }
+                                onCompleteTaskCreate = { this.onCompleteTaskCreate }
+                            />
+                        )
+                    }
+                    </div>
+                </div>
                 {
-                    this.state.toggleAddTask && (
-                        <TaskCreate 
-                            project_id = { this.props.match.params.id }
-                            onCompleteTaskCreate = { this.onCompleteTaskCreate }
-                        />
+                    (this.state.toggleAddTask || this.state.toggleEditProject) && (
+                       
+                        <hr/>
                     )
                 }
+                
                 <div className="body-part">
                     <div className="float-left">
-                    <ListGroup>
-                        <ListGroup.Item  style={ mystyle }><b>Date: </b><span>{ moment(this.state.project.created_at).format("LL") }</span></ListGroup.Item>
-                        <ListGroup.Item  style={ mystyle }><b>Time: </b><span>{ moment(this.state.project.created_at).format("LT") }</span></ListGroup.Item>
-                        <ListGroup.Item style={ mystyle }>
-                            <b>Description: </b>
-                            <p>{ this.state.project.description }</p>
-                        </ListGroup.Item>
-                    </ListGroup>
-                        
+                    { !this.state.toggleEditProject && (
+                            <>
+                                <ListGroup>
+                                    <ListGroup.Item  style={ mystyle }><b>Date: </b><span>{ moment(this.state.project.created_at).format("LL") }</span></ListGroup.Item>
+                                    <ListGroup.Item  style={ mystyle }><b>Time: </b><span>{ moment(this.state.project.created_at).format("LT") }</span></ListGroup.Item>
+                                    <ListGroup.Item style={ mystyle }>
+                                        <b>Description: </b>
+                                        <p>{ this.state.project.description }</p>
+                                    </ListGroup.Item>
+                                </ListGroup>
+                            </>
+                        )
+                    }
                         
                     </div>
                     <div className="float-right">
-                        <b><Badge variant="warning">No. of Task: {this.state.taskList.length}</Badge></b>
+                        {this.state.project.status == 0 && ( 
+                            <>
+                            <button className="btn btn-outline-danger sm" disabled>
+                                <FontAwesomeIcon className="mr-2" icon={faPauseCircle} style={{color: "#e3342f"}} />
+                                Pending
+                            </button>
+                                
+                            </> )}
+                        {this.state.project.status == 1 && ( 
+                            <>
+                                <button className="btn btn-outline-success sm" disabled>
+                                    <FontAwesomeIcon className="mr-2" icon={faCheckCircle} style={{color: "#38c172"}} />
+                                    Completed
+                                </button>
+                            </> )}
                     </div>
                 </div>
                 <div className="clearfix"></div>
@@ -115,7 +194,7 @@ class ProjectView extends React.Component {
                         </div>
                     )
                 }
-                
+                <hr/>
                 <TaskList taskList = { this.state.taskList } />
                 
             </>

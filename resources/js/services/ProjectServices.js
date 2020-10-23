@@ -17,3 +17,18 @@ export const storeNewProject = async (data) => {
         return res.data;
     });
 };
+
+/**
+ * updateProject()
+ * 
+ * @param 
+ */
+export const updateProject = async (id, data) => {
+
+    data.user_id = 1;
+    
+    return await Axios.put(`http://localhost/task/api/projects/${id}`, data).then((res) => {
+            
+        return res.data;
+    });
+};
